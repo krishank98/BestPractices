@@ -35,7 +35,7 @@ resource "aws_instance" "my_instance2" {
       apt update -y
       apt install nginx -y
       systemctl start nginx
-      echo "ip addr()" >> /usr/share/nginx/html
+      echo "ip addr()" >> /usr/share/nginx/index.html
       EOL
 
     tags ={
