@@ -175,6 +175,20 @@ ingress {
   }
 
   tags = {
-    Name = "stage-vpc"
+    Name = "stage-vpc-ec2-sg"
+  }
+}
+resource "aws_security_group" "alb-sg" {
+    name = "stage-alb-sg"
+    vpc_id = aws_vpc.stage-vpc.id
+
+    ingress {
+        from_port = 80
+        to_port   = 80
+        protocol  = "tcp"
+        cidr_blocks      = ["0.0.0.0/0"]
+    }   
+     tags = {
+    Name = "stage-vpc-alb-sg"
   }
 }
