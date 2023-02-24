@@ -87,6 +87,10 @@ resource "aws_route_table" "stage-vpc-public-route-table" {
     }
 }
 
+resource "aws_main_route_table_association" "stage-vpc-main-id" {
+    vpc_id =aws_vpc.stage-vpc.id
+    route_table_id = aws_route_table.stage-vpc-public-route-table.id
+}
 
 resource "aws_route_table" "stage-vpc-private-route-table" {
     vpc_id=aws_vpc.stage-vpc.id
@@ -145,14 +149,14 @@ resource "aws_security_group" "stage-sg" {
     from_port        = 80
     to_port          = 80
     protocol         = "tcp"
-    cidr_blocks      = [aws_vpc.stage-vpc.cidr_block]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 ingress {
    
     from_port        = 22
     to_port          = 22
     protocol         = "tcp"
-    cidr_blocks      = [aws_vpc.stage-vpc.cidr_block]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
 ingress {
@@ -160,7 +164,7 @@ ingress {
     from_port        = 8080
     to_port          = 8080
     protocol         = "tcp"
-    cidr_blocks      = [aws_vpc.stage-vpc.cidr_block]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
