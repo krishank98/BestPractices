@@ -5,6 +5,7 @@ resource "aws_instance" "server" {
    vpc_security_group_ids = [aws_security_group.instance_sg.id]
    subnet_id = aws_subnet.public_ap_south_1a.id
    availability_zone = data.aws_availability_zones.all.names[0]
+   associate_public_ip_address = true
 
    user_data = <<EOF
 #!/bin/bash
