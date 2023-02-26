@@ -24,3 +24,17 @@ EOF
    }
 }
 
+
+resource "aws_instance" "dbserver" {
+   ami = var.amiid
+   instance_type = var.type
+   key_name = var.pemfile
+   vpc_security_group_ids = [aws_security_group.db_sg.id]
+   subnet_id = aws_subnet.private_ap_south_1b.id
+   availability_zone = data.aws_availability_zones.all.names[1]
+   associate_public_ip_address = false
+
+     tags = {
+    Name = "dbserver-stageproject"
+   }
+}
