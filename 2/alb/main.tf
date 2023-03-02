@@ -54,9 +54,15 @@ resource "aws_security_groups" "instance-sg" {
 
 resource "aws_launch_configuration" "example" {
   name = "launch_configuration"
-  ///
-  ///
-  ///
+  ami_id = "ami-0620d12a9cf777c87"
+  instance_type = "t2.micro"
+  security_groups = [aws_security_group.instance.id]
+
+  user_data = <<-EOF
+  #!/bin/bash
+  echo "<html><body><h1 >page </h1></body></html>
+  nohup busybox httpd -f -p "%{var.server_port}" &
+  EOF
   lifecycle {
     create_before_destroy = true
   }
