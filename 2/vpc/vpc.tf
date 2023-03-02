@@ -54,16 +54,11 @@ resource "aws_route_table" "public_route_table" {
 resource "aws_route_table" "private_route_table" {
     vpc_id = aws_vpc.vpc.id
     
-    route {
-        cidr_block = "0.0.0.0/0"
-        instance_id = aws_instance.server.id
-    }
 
     tags = {
         Name = "STAGEPRIVATE_ROUTETABLE_STAGEPROJECT"
     }
 
-    depends_on = [aws_instance.server]
 }
 
 resource "aws_route_table_association" "vpc_ap_south_1a_public" {
