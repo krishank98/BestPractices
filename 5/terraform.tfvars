@@ -1,6 +1,6 @@
 
 
-region                   = "us-west-2"
+region                   = "ap-south-1"
 availability_zones_count = 2
 
 project = "TFEKSWorkshop"
